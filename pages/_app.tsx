@@ -1,8 +1,13 @@
-import '../styles/globals.css'
-import type { AppProps } from 'next/app'
+import type { AppProps } from "next/app";
+
+import { ThemeProvider } from "@theme-ui/theme-provider";
 
 function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
+  return (
+    <ThemeProvider theme={{ colors: { background: "#0fa20f" } }}>
+      <Component {...pageProps} />;
+    </ThemeProvider>
+  );
 }
 
-export default MyApp
+export default MyApp;
