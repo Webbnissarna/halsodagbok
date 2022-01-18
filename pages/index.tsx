@@ -10,9 +10,26 @@ import {
   InputProps,
   SelectProps,
 } from "@theme-ui/components";
-import { FormEventHandler } from "react";
+import { ChangeEvent, useState } from "react";
 
 const Home: NextPage = () => {
+  const [formData, setFormData] = useState({});
+
+  const handleInputChange = (e: ChangeEvent) => {
+    const target = e.currentTarget as HTMLInputElement;
+    const value = target.type === "checkbox" ? target.checked : target.value;
+    const name = target.name;
+
+    setFormData({ [name]: value });
+  };
+  const handleSelectChange = (e: ChangeEvent) => {
+    const target = e.currentTarget as HTMLSelectElement;
+    const value = target.value;
+    const name = target.name;
+
+    setFormData({ [name]: value });
+  };
+
   return (
     <Box>
       <Head>
@@ -38,10 +55,22 @@ const Home: NextPage = () => {
           sx={{ flexDirection: "column", gap: "12px" }}
           onSubmit={(e) => {
             e.preventDefault();
+            fetch;
           }}
         >
-          <Input label="Vikt" type={"number"} min={0} defaultValue={80} />
-          <Select label={"Generellt mående"} defaultValue={":|"}>
+          <Input
+            name="weight"
+            onChange={handleInputChange}
+            label="Vikt"
+            type={"number"}
+            min={0}
+            defaultValue={80}
+          />
+          <Select
+            name="wellness"
+            label={"Generellt mående"}
+            defaultValue={":|"}
+          >
             <option value=":'(">-2</option>
             <option value=":(">-1</option>
             <option value=":|">0</option>
